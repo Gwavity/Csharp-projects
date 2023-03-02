@@ -96,7 +96,7 @@ namespace getCurrentApplication
             return (ss.ToString(),result);
         }
 
-        static string getFileName(string result)
+        static string getFileName(string title,string result)
         {
             switch (result)
             {
