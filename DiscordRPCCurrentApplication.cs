@@ -81,7 +81,7 @@ namespace getCurrentApplication
             var processHandle = OpenProcess(0x0400 | 0x0010, false, (int)pid);
             string result = null;
 
-            if (GetModuleFileNameEx(processHandle, IntPtr.Zero, ss, 4000) > 0)
+            if (GetModuleFileNameEx(processHandle, IntPtr.Zero, ss, nChar) > 0)
             {
                 result = Path.GetFileName(ss.ToString());
             }
