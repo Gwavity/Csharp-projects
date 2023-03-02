@@ -27,18 +27,23 @@ namespace getCurrentApplication
             string currentApp = getApplication().Item2;
             string NewProcess;
             Timestamps time = null;
+            
             while (true)
             { 
                 if (currentWindow != getApplication().Item1)
                 {
                     currentWindow = getApplication().Item1;
-                    if (currentWindow.Length >= 128)
+                    if (currentWindow.Length > 100)
                     {
-                        NewProcess = $"{currentWindow.Substring(0, 124)}...";
+                        NewProcess = $"{currentWindow.Substring(0, 100)}...";
                     }
                     else
                     {
                         NewProcess = currentWindow;
+                    }
+                    if (currentWindow.ToLower().Contains("gmail"))
+                    {
+                        NewProcess = "Gmail";
                     }
                     if (client.CurrentPresence && client.CurrentPresence.HasTimestamps())
                     {
@@ -55,7 +60,7 @@ namespace getCurrentApplication
                         Timestamps = !(time is null) ? time : Timestamps.Now,
                         Assets = new Assets()
                         {
-                            LargeImageKey = getFileName(currentApp)//To add more images, update getFileName function with image key names from discord developer portal.
+                            LargeImageKey = getFileName(NewProcess,currentApp)//To add more images, update getFileName function with image key names from discord developer portal.
                         }
                     });
                 }
@@ -100,7 +105,19 @@ namespace getCurrentApplication
                 //and upload the images with the key which is returned to your discod developer portal.
                 //
                 case "chrome.exe":
-                    return "chrome";
+                    switch (title)
+                    {
+                        case string youtube when youtube.ToLower().Contains("youtube"):
+                            return "youtube";
+                        case string gmail when gmail.ToLower().Contains("gmail"):
+                            return "gmail";
+                        case string twitter when twitter.ToLower().Contains("twitter"):
+                            return "twitter";
+                        case string stack when stack.ToLower().Contains("stack"):
+                            return "stack";
+                        default:
+                            return "chrome";
+                    }
                 case "Code.exe":
                     return "vscode";
                 case "devenv.exe":
