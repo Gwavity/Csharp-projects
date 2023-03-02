@@ -18,6 +18,7 @@ namespace getCurrentApplication
         public static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
         [DllImport("psapi.dll")]
         static extern uint GetModuleFileNameEx(IntPtr hProcess, IntPtr hModule, [Out] StringBuilder lpBaseName, [In][MarshalAs(UnmanagedType.U4)] int nSize);
+        
         static void Main(string[] args)
         {
             DiscordRpcClient client = new DiscordRpcClient("");//Pass your bot client ID in here and if the bot has images uploaded to it, then it will work fine.
@@ -51,6 +52,7 @@ namespace getCurrentApplication
                 }
             }
         }
+        
         static IntPtr getActiveWindow()
         {
             IntPtr handle = IntPtr.Zero;
@@ -58,6 +60,7 @@ namespace getCurrentApplication
 
             return handle;
         }
+        
         static string getApplicationName()
         {
             IntPtr handle = getActiveWindow();
@@ -68,6 +71,7 @@ namespace getCurrentApplication
 
             return ss.ToString();
         }
+        
         static string getFileName()
         {
             IntPtr handle = getActiveWindow();
