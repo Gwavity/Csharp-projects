@@ -42,7 +42,6 @@ namespace getCurrentApplication
                     }
                     if (client.CurrentPresence && client.CurrentPresence.HasTimestamps())
                     {
-
                         time = client.CurrentPresence.Timestamps;
                     }
                     if (currentApp != getApplication().Item2)
@@ -85,7 +84,6 @@ namespace getCurrentApplication
             if (GetModuleFileNameEx(processHandle, IntPtr.Zero, ss, 4000) > 0)
             {
                 result = Path.GetFileName(ss.ToString());
-                //Console.WriteLine(result);
             }
 
             GetWindowText(handle, ss, nChar);//To set window I'll try using the window handle, run a switch case on it 
