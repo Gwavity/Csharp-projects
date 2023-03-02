@@ -67,7 +67,7 @@ namespace getCurrentApplication
             int nChar = 4000;
             StringBuilder ss = new StringBuilder(nChar);
 
-            GetWindowText(handle, ss, nChar);//To set window I'll try using the window handle, run a switch case on it 
+            GetWindowText(handle, ss, nChar);
 
             return ss.ToString();
         }
