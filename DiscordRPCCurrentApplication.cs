@@ -91,8 +91,8 @@ namespace getCurrentApplication
             switch(result)
             {
             //
-            //For all of the images that you want, put the application name in here
-            //and upload the images with the key which is returned to your discod developer portal.
+            //For all of the images that you want, put the application name
+            //and upload the images with the key which is returned to your discord developer portal.
             //
                 case "chrome.exe":
                     return "chrome";
