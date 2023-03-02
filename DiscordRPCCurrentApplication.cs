@@ -115,6 +115,8 @@ namespace getCurrentApplication
                             return "twitter";
                         case string stack when stack.ToLower().Contains("stack"):
                             return "stack";
+                        case string instagram when instagram.ToLower().Contains("instagram"):
+                            return "instagram";
                         default:
                             return "chrome";
                     }
