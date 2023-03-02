@@ -21,7 +21,7 @@ namespace getCurrentApplication
         
         static void Main(string[] args)
         {
-            DiscordRpcClient client = new DiscordRpcClient("1015499582257516547");//Pass your bot client ID in here and if the bot has images uploaded to it, then it will work fine.
+            DiscordRpcClient client = new DiscordRpcClient("");//Pass your bot client ID in here and if the bot has images uploaded to it, then it will work fine.
             client.Initialize();
             string currentWindow = getApplication().Item1;
             string currentApp = getApplication().Item2;
