@@ -21,38 +21,48 @@ namespace getCurrentApplication
         
         static void Main(string[] args)
         {
-            DiscordRpcClient client = new DiscordRpcClient("");//Pass your bot client ID in here and if the bot has images uploaded to it, then it will work fine.
-            string NewProcess;
+            DiscordRpcClient client = new DiscordRpcClient("1015499582257516547");//Pass your bot client ID in here and if the bot has images uploaded to it, then it will work fine.
             client.Initialize();
-            string currentApp = getApplicationName();
-            string currentWindow = getApplicationName();
+            string currentWindow = getApplication().Item1;
+            string currentApp = getApplication().Item2;
+            string NewProcess;
+            Timestamps time = null;
             while (true)
             { 
-                if (currentWindow != getApplicationName())
+                if (currentWindow != getApplication().Item1)
                 {
-                    currentWindow = getApplicationName();
-                    if(currentWindow.Length > 50)
+                    currentWindow = getApplication().Item1;
+                    if (currentWindow.Length >= 128)
                     {
-                        NewProcess = $"{currentWindow.Substring(0, 45)}...";
+                        NewProcess = $"{currentWindow.Substring(0, 124)}...";
                     }
                     else
                     {
-                        NewProcess = currentWindow.Substring(0, currentWindow.Length);
+                        NewProcess = currentWindow;
                     }
+                    if (client.CurrentPresence && client.CurrentPresence.HasTimestamps())
+                    {
 
+                        time = client.CurrentPresence.Timestamps;
+                    }
+                    if (currentApp != getApplication().Item2)
+                    {
+                        currentApp = getApplication().Item2;
+                        time = null;
+                    }
                     client.SetPresence(new RichPresence()
                     {
                         Details = NewProcess,
-                        Timestamps = Timestamps.Now,
+                        Timestamps = !(time is null) ? time : Timestamps.Now,
                         Assets = new Assets()
                         {
-                            LargeImageKey = getFileName()//To add more images, update getFileName function with image key names from discord developer portal.
+                            LargeImageKey = getFileName(currentApp)//To add more images, update getFileName function with image key names from discord developer portal.
                         }
                     });
                 }
             }
         }
-        
+
         static IntPtr getActiveWindow()
         {
             IntPtr handle = IntPtr.Zero;
@@ -60,19 +70,8 @@ namespace getCurrentApplication
 
             return handle;
         }
-        
-        static string getApplicationName()
-        {
-            IntPtr handle = getActiveWindow();
-            int nChar = 4000;
-            StringBuilder ss = new StringBuilder(nChar);
 
-            GetWindowText(handle, ss, nChar);
-
-            return ss.ToString();
-        }
-        
-        static string getFileName()
+        static (string,string) getApplication()
         {
             IntPtr handle = getActiveWindow();
             int nChar = 4000;
@@ -86,16 +85,28 @@ namespace getCurrentApplication
             if (GetModuleFileNameEx(processHandle, IntPtr.Zero, ss, 4000) > 0)
             {
                 result = Path.GetFileName(ss.ToString());
+                //Console.WriteLine(result);
             }
 
-            switch(result)
+            GetWindowText(handle, ss, nChar);//To set window I'll try using the window handle, run a switch case on it 
+
+            return (ss.ToString(),result);
+        }
+
+        static string getFileName(string result)
+        {
+            switch (result)
             {
-            //
-            //For all of the images that you want, put the application name
-            //and upload the images with the key which is returned to your discord developer portal.
-            //
+                //
+                //For all of the images that you want, put the application name in here
+                //and upload the images with the key which is returned to your discod developer portal.
+                //
                 case "chrome.exe":
                     return "chrome";
+                case "Code.exe":
+                    return "vscode";
+                case "devenv.exe":
+                    return "visualstudio";
                 case "Discord.exe":
                     return "discord";
                 case "Spotify.exe":
@@ -103,7 +114,7 @@ namespace getCurrentApplication
                 case "steam.exe":
                     return "steam";
                 default:
-                    return "";//
+                    return "";
             }
         }
     }
