@@ -33,24 +33,19 @@ namespace getCurrentApplication
                 if (currentWindow != getApplication().Item1)
                 {
                     currentWindow = getApplication().Item1;
-                    if (currentWindow.Length > 100)
-                    {
+                    if (currentWindow.Length > 100) {
                         NewProcess = $"{currentWindow.Substring(0, 100)}...";
                     }
-                    else
-                    {
+                    else {
                         NewProcess = currentWindow;
                     }
-                    if (currentWindow.ToLower().Contains("gmail"))
-                    {
+                    if (currentWindow.ToLower().Contains("gmail")) {
                         NewProcess = "Gmail";
                     }
-                    if (client.CurrentPresence && client.CurrentPresence.HasTimestamps())
-                    {
+                    if (client.CurrentPresence && client.CurrentPresence.HasTimestamps() && currentApp == getApplication().Item2) {
                         time = client.CurrentPresence.Timestamps;
-                    }
-                    if (currentApp != getApplication().Item2)
-                    {
+                    } 
+                    else {
                         currentApp = getApplication().Item2;
                         time = null;
                     }
