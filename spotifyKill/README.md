@@ -1,0 +1,1 @@
+<b>Created an application for closing all occurrences of Spotify because I used to get an error where my Spotify wouldn't close, and I had to use Task Manager to end all occurrences of the task. It became redundant, so I made this as a QOL app. </b> 
