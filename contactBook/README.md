@@ -2,7 +2,7 @@ This was a project where I was testing the use of SQL in C#.
 <b>Initial screen where you can enter information</b>
 <img width="777" height="450" alt="image" src="https://github.com/user-attachments/assets/094d4dfe-ed97-484f-94b6-831afb9de7b0" />
 
-<b>The error that appears when you enter information that is not suitable for the text box</b>
+<b>Display of contacts that I created</b>
 <img width="768" height="445" alt="image" src="https://github.com/user-attachments/assets/e9626eb7-cc0d-41c1-8015-1254f1cbb99b" />
 
 <b>Upon double clicking a contact, you are prompted with the option to delete said contact.</b>
